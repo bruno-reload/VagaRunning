@@ -17,6 +17,8 @@ public class Background : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // renderer.material.SetFloat("Up",player.Speed);
+        Debug.Log(renderer.material.GetFloat("Up"));
+        // Debug.Log(Mathf.Clamp(player.rigidbody.velocity.y,0,1));
+        // renderer.material.SetFloat("Up",Mathf.Clamp(player.rigidbody.velocity.y,0,1));
     }
 }

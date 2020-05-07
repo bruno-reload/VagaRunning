@@ -6,43 +6,50 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class Player : MonoBehaviour
 {
-    private Vector2 direction;
-    private new Rigidbody2D rigidbody;
-    private float speedRun;
-    private float gravity;
-    private float speedWalk;
+    public float speed = 0;
+    [HideInInspector]
+    public new Rigidbody2D rigidbody;
+    private new Animator animation;
     public Coroutine corrotine { get; private set; }
+    private Collider2D childrenCollide;
+
+    [HideInInspector]
+    public bool onFloor;
 
     // jump factor float y = -4 * Mathf.Pow(Time.deltaTime % 1, 2) + 4 * (Time.deltaTime % 1);
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        gravity = 9.8f;
+        animation = GetComponentInChildren<Animator>();
+        childrenCollide = GetComponentInChildren<Collider2D>();
+        animation.SetBool("start", true);
     }
-    void FixedUpdate()
+    void Update()
     {
-        Debug.Log(Input.GetButton("Fire1"));
-        if (Input.GetButtonDown("Fire1"))
+        if (onFloor)
         {
-            // corrotine = jump();
-            // StartCoroutine(corrotine);
+            animation.SetFloat("speedY", 0);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                rigidbody.velocity = Vector2.up * speed * Time.fixedDeltaTime * 100;
+                onFloor = false;
+                animation.SetFloat("speedX", .6f);
+            }
+
         }
-        // velocity.y -= Time.fixedTime;
-        direction.y = -gravity;
-        rigidbody.MovePosition(direction);
+        if (!onFloor)
+        {
+            if (rigidbody.velocity.y < 0)
+            {
+                animation.SetFloat("speedY", -1);
+            }
+            else
+            {
+                animation.SetFloat("speedY", 1);
+            }
+
+        }
     }
 
-    IEnumerable jump()
-    {
 
-        Debug.Log("foi");
-        float x = 0;
-        while (x <= 1 / 2)
-        {
-            x += Time.deltaTime;
-            direction.y = -4 * Mathf.Pow(x, 2) + 4 * (x) * 1000;
-            Debug.Log(-4 * Mathf.Pow(x, 2) + 4 * (x) * 1000);
-            yield return null;
-        }
-    }
 }

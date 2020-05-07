@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\background\Background.cs" />
+     <Compile Include="Assets\player\floor.cs" />
      <Compile Include="Assets\player\Player.cs" />
      <None Include="Assets\background\designer\Bacground.shader" />
      <None Include="Assets\Vaga\freegui\png\README.txt" />
