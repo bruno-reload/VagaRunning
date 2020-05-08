@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         childrenCollide = GetComponentInChildren<Collider2D>();
         animation.SetBool("start", true);
     }
-    void Update()
+    void FixedUpdate()
     {
         if (onFloor)
         {
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
             {
                 rigidbody.velocity = Vector2.up * speed * Time.fixedDeltaTime * 100;
                 onFloor = false;
-                animation.SetFloat("speedX", .6f);
+                animation.SetFloat("speedX", 1);
             }
 
         }

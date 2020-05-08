@@ -139,8 +139,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01810646, y: 0.018106341}
-  m_Size: {x: 1.477756, y: 3.7522037}
+  m_Offset: {x: 0.01810646, y: 0.0024385452}
+  m_Size: {x: 1.477756, y: 3.7835393}
   m_Direction: 0
 --- !u!114 &2471409361964614867
 MonoBehaviour:
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  rigidbody: {fileID: 0}
   onFloor: 0
 --- !u!1 &7292724203500885393
 GameObject:

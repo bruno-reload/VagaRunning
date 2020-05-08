@@ -4,7 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Speed ("Speed", float) = 0
-        _Up("Up", Range(0, 1)) = 0
+        _V("Vertical direction", Range(-1, 1)) = 0
     }
     SubShader
     {
@@ -32,8 +32,7 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float _Speed;
-            float _Up;
-
+            float _V;
             v2f vertex (appdata v)
             {
                 v2f o;
@@ -45,10 +44,9 @@
 
             fixed4 fragment (v2f i) : SV_Target
             {
-
                 i.uv.x += _Speed * _Time.y;
                 
-                fixed4 col = tex2D(_MainTex, float2(i.uv.x, i.uv.y + _Up/10));
+                fixed4 col = tex2D(_MainTex, float2(i.uv.x,i.uv.y + _V/4));
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
             }
