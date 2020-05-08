@@ -10,6 +10,7 @@ public class Background : MonoBehaviour
     [HideInInspector]
     private new Renderer renderer;
     private float x = 0;
+    private float y = 0;
     void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -19,20 +20,18 @@ public class Background : MonoBehaviour
     void Update()
     {
         if (player.onFloor)
-            renderer.material.SetFloat("_V", 0);
+            x = 0.0f;
         else
         {
             if (player.rigidbody.velocity.y > 0)
             {
                 x += Time.deltaTime;
-                renderer.material.SetFloat("_V", -4 * Mathf.Pow(x, 2) + 4 * x);
             }
-
             if (player.rigidbody.velocity.y < 0)
             {
                 x -= Time.deltaTime;
-                renderer.material.SetFloat("_V", -4 * Mathf.Pow(x, 2) + 4 * x);
             }
         }
+        renderer.material.SetFloat("_V", -4 * Mathf.Pow(x, 2) + 4 * x);
     }
 }

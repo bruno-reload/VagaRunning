@@ -41,9 +41,9 @@ public class Player : MonoBehaviour
         {
             if (rigidbody.velocity.y < 0)
             {
-                animation.SetFloat("speedY", -1);
+                animation.SetFloat("speedY", 0);
             }
-            else
+            if (rigidbody.velocity.y > 0)
             {
                 animation.SetFloat("speedY", 1);
             }
