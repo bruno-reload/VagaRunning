@@ -10,7 +10,6 @@ public class Background : MonoBehaviour
     [HideInInspector]
     private new Renderer renderer;
     private float x = 0;
-    private float y = 0;
     void Start()
     {
         renderer = GetComponent<Renderer>();
