@@ -122,12 +122,12 @@ PrefabInstance:
     - target: {fileID: 956124904752466112, guid: 38e7ac1490f0403628528861010a625c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.22163
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 956124904752466112, guid: 38e7ac1490f0403628528861010a625c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.693523
+      value: -2.97
       objectReference: {fileID: 0}
     - target: {fileID: 956124904752466112, guid: 38e7ac1490f0403628528861010a625c,
         type: 3}
@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 956124904752466125, guid: 38e7ac1490f0403628528861010a625c,
         type: 3}
       propertyPath: m_Name
-      value: 2
+      value: floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38e7ac1490f0403628528861010a625c, type: 3}
@@ -290,8 +290,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142677000}
-  - component: {fileID: 2142677001}
   - component: {fileID: 2142677002}
+  - component: {fileID: 2142677001}
   m_Layer: 0
   m_Name: LevelGeneration
   m_TagString: Untagged
@@ -342,6 +342,7 @@ MonoBehaviour:
   - {fileID: 174089757734523170, guid: c3a461cb8293684438efb6e2bb7d2c5f, type: 3}
   - {fileID: 7794295916908058925, guid: 6289b1129b89657c5aa40fc56f1203ed, type: 3}
   - {fileID: 8349214406818994563, guid: 865b8a9863cd23668beba882b1f5e356, type: 3}
+  water:
   - {fileID: 4148688742960580574, guid: ce66a8acab1e29b98a7564ab8959df7c, type: 3}
   - {fileID: 1659948795932171002, guid: dcf4ad898b045a7fc9951d283e5f4efe, type: 3}
 --- !u!114 &2142677002
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 128, y: 128}
+  resolution: {x: 16, y: 9}
 --- !u!1001 &1346687258666164716
 PrefabInstance:
   m_ObjectHideFlags: 0
