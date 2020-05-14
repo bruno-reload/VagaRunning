@@ -6,19 +6,20 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     [SerializeField]
-    public Tile[] tiles;
+    public Tile[] floor;
     public Tile[] water;
     public Dictionary<byte, Tile> spriteFloor;
     public Dictionary<byte, Tile> spriteWater;
     private SimpleGrid simpleGrid;
-
+    private int i = 0;
+    private Vector2 startPos;
     void Start()
     {
         simpleGrid = GetComponent<SimpleGrid>();
         spriteFloor = new Dictionary<byte, Tile>();
         spriteWater = new Dictionary<byte, Tile>();
 
-        foreach (Tile item in tiles)
+        foreach (Tile item in floor)
         {
             foreach (byte b in spriteFloor.Keys)
             {
@@ -29,6 +30,7 @@ public class Level : MonoBehaviour
                 }
             }
             spriteFloor.Add(item.getMask(), item);
+
         }
         foreach (Tile item in water)
         {
@@ -47,24 +49,30 @@ public class Level : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        startPos = new Vector2(5, 4);
         if (Input.GetKeyDown(KeyCode.B))
         {
 
-            if (simpleGrid.neighborhoorMask(5, 4) == 0)
+            if (simpleGrid.neighborhoodMask(5, 4) == 0)
             {
+
                 foreach (byte key in spriteFloor.Keys)
                 {
                     if (spriteFloor[key].start)
                     {
                         // definir a forma com a qual serão iniciadas as contruções de plataforma
-                        Instantiate(spriteFloor[key]);
-                        simpleGrid.setCell(5, 4, spriteFloor[key]);
+                        floor[i] = Instantiate(spriteFloor[key]);
+                        simpleGrid.setCell((int)startPos.x, (int)startPos.y, spriteFloor[key].mask);
+                        i = (i + 1) % floor.Length;
                     }
                 }
             }
             else
             {
-
+                foreach (byte neighbor in simpleGrid.getNeighborhood((int)startPos.x, (int)startPos.y))
+                {
+                }
             }
 
         }

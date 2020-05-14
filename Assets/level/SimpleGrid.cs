@@ -25,15 +25,15 @@ public class SimpleGrid : MonoBehaviour
         }
     }
 
-    public void setCell(int l, int c, Tile t)
+    public void setCell(int l, int c, byte mask)
     {
-        cell[l, c] = t.mask;
+        cell[l, c] = mask;
     }
     public byte getCell(int l, int c)
     {
         return cell[l, c];
     }
-    public byte neighborhoorMask(int l, int c)
+    public byte neighborhoodMask(int l, int c)
     {
         return (byte)((cell[l - 1, c] & 0x8) &
         (cell[l, c - 1] & 0x1) &
@@ -43,5 +43,9 @@ public class SimpleGrid : MonoBehaviour
         (cell[l + 1, c - 1] & 0x40) &
         (cell[l - 1, c + 1] & 0x20) &
         (cell[l + 1, c + 1] & 0x10));
+    }
+    public byte[] getNeighborhood(int l, int c)
+    {
+        return new byte[] {cell[l - 1, c],cell[l, c - 1],cell[l + 1, c],cell[l, c + 1],cell[l - 1, c - 1],cell[l + 1, c - 1],cell[l - 1, c + 1],cell[l + 1, c + 1]};
     }
 }
