@@ -54,11 +54,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\background\Background.cs" />
-     <Compile Include="Assets\level\Level.cs" />
-     <Compile Include="Assets\level\SimpleGrid.cs" />
+     <Compile Include="Assets\CameraControll.cs" />
+     <Compile Include="Assets\level\platform\Culling.cs" />
+     <Compile Include="Assets\level\platform\Platform.cs" />
+     <Compile Include="Assets\level\Progress.cs" />
      <Compile Include="Assets\level\SpawnPlatform.cs" />
-     <Compile Include="Assets\level\Tile.cs" />
-     <Compile Include="Assets\level\tilePrefab\Platform.cs" />
      <Compile Include="Assets\player\floor.cs" />
      <Compile Include="Assets\player\Player.cs" />
      <None Include="Assets\background\designer\Bacground.shader" />

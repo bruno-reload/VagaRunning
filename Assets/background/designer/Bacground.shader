@@ -4,7 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _H ("Horizontal speed", range(0, 1)) = 0
-        _V("Vertical speed", Range(0, 1)) = 0
+        _V("Vertical speed", Range(-1, 1)) = 0
     }
     SubShader
     {
@@ -46,7 +46,7 @@
             {
                 i.uv.x += _H * _Time.y;
                 
-                fixed4 col = tex2D(_MainTex, float2(i.uv.x,i.uv.y + _V/4));
+                fixed4 col = tex2D(_MainTex, float2(i.uv.x,i.uv.y + _V));
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
             }
