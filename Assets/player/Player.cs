@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private Collider2D childrenCollide;
 
     [HideInInspector]
-    public bool onFloor;
+    public bool onFloor = false;
 
     // jump factor float y = -4 * Mathf.Pow(Time.deltaTime % 1, 2) + 4 * (Time.deltaTime % 1);
     private void Start()
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     {
         if (onFloor)
         {
+            animation.SetBool("start", true);
             animation.SetFloat("speedY", 0);
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -39,9 +40,10 @@ public class Player : MonoBehaviour
         }
         if (!onFloor)
         {
+            animation.SetBool("start", false);
             if (rigidbody.velocity.y < 0)
             {
-                animation.SetFloat("speedY", 0);
+                animation.SetFloat("speedY", -1);
             }
             if (rigidbody.velocity.y > 0)
             {
