@@ -5,18 +5,32 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class Background : MonoBehaviour
 {
-    private Player player;
-    public float speedFactor;
+    public Player player;
+    public static float speedFactor = 5;
     [HideInInspector]
     private new Renderer renderer;
+    private float y = 0;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         renderer = GetComponent<Renderer>();
     }
+
+    // Update is called once per frame
     void Update()
     {
-        if (!player.onFloor)
-            renderer.material.SetFloat("_V", Mathf.Lerp(0, -Mathf.Sign(player.rigidbody.velocity.y), Time.deltaTime * speedFactor));
+        if (player.onFloor)
+            y = 0;
+        else
+        {
+            if (player.rigidbody.velocity.y > 0)
+            {
+                y += Time.deltaTime;
+            }
+            if (player.rigidbody.velocity.y < 0)
+            {
+                y -= Time.deltaTime;
+            }
+        }
+        renderer.material.SetFloat("_V", Mathf.Lerp(0, Mathf.Sign(player.rigidbody.velocity.y), y));
     }
 }

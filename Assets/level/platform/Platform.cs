@@ -72,11 +72,11 @@ public class Platform : MonoBehaviour
     public bool checkCulling()
     {
         int status = 0;
-        // foreach (Transform item in GetComponentInChildren<Transform>())
-        // {
-        //     if (item.tag == "Untagged")
-        //         status += System.Convert.ToInt32(item.GetComponent<SpriteRenderer>().enabled);
-        // }
+        foreach (Transform item in GetComponentInChildren<Transform>())
+        {
+            if (item.tag == "Untagged")
+                status += System.Convert.ToInt32(item.GetComponent<Renderer>().enabled);
+        }
         return (status == 0) ? true : false;
     }
 }
