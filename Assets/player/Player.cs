@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     // jump factor float y = -4 * Mathf.Pow(Time.deltaTime % 1, 2) + 4 * (Time.deltaTime % 1);
     private void Start()
     {
+        speed = Progress.globalSpeed;
         rigidbody = GetComponent<Rigidbody2D>();
         animation = GetComponentInChildren<Animator>();
         childrenCollide = GetComponentInChildren<Collider2D>();
@@ -26,30 +27,24 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
+        speed = Progress.globalSpeed;
         if (onFloor)
         {
             animation.SetBool("floor", true);
             animation.SetFloat("speedX", 1);
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyUp(KeyCode.A))
             {
-                animation.SetFloat("speedY", -1);
-                rigidbody.velocity = Vector2.up * speed * Time.fixedDeltaTime * 100;
+                animation.SetBool("floor", false);
+                animation.SetFloat("speedY", 1);
+                rigidbody.velocity = Vector2.up * speed;
                 onFloor = false;
             }
-
         }
         if (!onFloor)
         {
-            
-            animation.SetFloat("speedX", -1);
-            animation.SetBool("floor", false);
             if (rigidbody.velocity.y < 0)
             {
                 animation.SetFloat("speedY", -1);
-            }
-            if (rigidbody.velocity.y > 0)
-            {
-                animation.SetFloat("speedY", 1);
             }
         }
     }

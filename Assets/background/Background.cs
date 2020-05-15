@@ -19,6 +19,7 @@ public class Background : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        renderer.material.SetFloat("_H", Progress.globalSpeed / 20);
         float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
         if (player.onFloor)
             y = 0.0f;

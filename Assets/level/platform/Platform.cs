@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    public Vector3 basePosition;
-    public ArrayList targets;
+    public Vector3 pivot;
+    public ArrayList endTarget;
     public check platform = new check();
     private void Awake()
     {
-        targets = new ArrayList();
+        endTarget = new ArrayList();
         foreach (Transform item in GetComponentsInChildren<Transform>())
         {
-            if (item.tag == "baseTarget")
+
+            if (item.tag == "startTarget")
             {
-                basePosition = new Vector3(-item.position.x, item.position.y, 0);
+                pivot = new Vector3(item.localPosition.x, 0, 0);
             }
             if (item.tag == "target")
             {
-                targets.Add(item);
+                endTarget.Add(item);
             }
         }
         platform.last = false;
@@ -45,7 +46,7 @@ public class Platform : MonoBehaviour
         platform.last = false;
         platform.visibleEndPlatform = false;
         gameObject.SetActive(false);
-        transform.position = GetComponentInParent<Transform>().position + basePosition;
+        transform.position = GetComponentInParent<Transform>().position + pivot;
     }
     private void endOfPlatformWhenVisible()
     {
@@ -67,7 +68,7 @@ public class Platform : MonoBehaviour
     }
     private void movePlatform()
     {
-        transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed, 0, 0);
+        transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
     }
     public bool checkCulling()
     {
