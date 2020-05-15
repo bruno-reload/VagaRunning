@@ -28,19 +28,21 @@ public class Player : MonoBehaviour
     {
         if (onFloor)
         {
-            animation.SetBool("start", true);
-            animation.SetFloat("speedY", 0);
+            animation.SetBool("floor", true);
+            animation.SetFloat("speedX", 1);
             if (Input.GetKeyDown(KeyCode.A))
             {
+                animation.SetFloat("speedY", -1);
                 rigidbody.velocity = Vector2.up * speed * Time.fixedDeltaTime * 100;
                 onFloor = false;
-                animation.SetFloat("speedX", 1);
             }
 
         }
         if (!onFloor)
         {
-            animation.SetBool("start", false);
+            
+            animation.SetFloat("speedX", -1);
+            animation.SetBool("floor", false);
             if (rigidbody.velocity.y < 0)
             {
                 animation.SetFloat("speedY", -1);
@@ -49,9 +51,6 @@ public class Player : MonoBehaviour
             {
                 animation.SetFloat("speedY", 1);
             }
-
         }
     }
-
-
 }
