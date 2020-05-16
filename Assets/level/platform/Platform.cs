@@ -61,9 +61,6 @@ public class Platform : MonoBehaviour
                         platform.visibleEndPlatform = true;
                     }
                 }
-                // if (item.gameObject.tag == "firstTarget")
-                // {
-                // }
             }
     }
     private void movePlatform()
@@ -79,6 +76,26 @@ public class Platform : MonoBehaviour
                 status += System.Convert.ToInt32(item.GetComponent<Renderer>().enabled);
         }
         return (status == 0) ? true : false;
+    }
+
+    public void activeJumpEffect(int i)
+    {
+        GameObject[] mushroom = new GameObject[2];
+        foreach (Transform item in GetComponentInChildren<Transform>())
+        {
+            if (item.tag == "mushroomTriple")
+            {
+                mushroom[0] = item.gameObject;
+            }
+            if (item.tag == "mushroomDouble")
+            {
+                mushroom[1] = item.gameObject;
+            }
+        }
+        if(i < 2){
+            return;
+        }
+        mushroom[(i - 2) % mushroom.Length].SetActive(true);
     }
 }
 

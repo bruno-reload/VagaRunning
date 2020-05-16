@@ -34,17 +34,20 @@ public class Player : MonoBehaviour
             animation.SetFloat("speedX", 1);
             if (Input.GetKeyUp(KeyCode.A))
             {
-                animation.SetBool("floor", false);
-                animation.SetFloat("speedY", 1);
                 rigidbody.velocity = Vector2.up * speed;
                 onFloor = false;
             }
         }
         if (!onFloor)
         {
+            animation.SetBool("floor", false);
             if (rigidbody.velocity.y < 0)
             {
                 animation.SetFloat("speedY", -1);
+            }
+            if (rigidbody.velocity.y > 0)
+            {
+                animation.SetFloat("speedY", 1);
             }
         }
     }

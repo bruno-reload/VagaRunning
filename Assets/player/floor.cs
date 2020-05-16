@@ -11,4 +11,11 @@ public class floor : MonoBehaviour
             GetComponentInParent<Player>().onFloor = true;
         }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Floor")
+        {
+            GetComponentInParent<Player>().onFloor = false;
+        }
+    }
 }

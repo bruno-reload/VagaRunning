@@ -9,7 +9,6 @@ public class SpawnPlatform : MonoBehaviour
     private Vector3 startPos;
     private Vector3 endPos;
     private Coroutine aStarte;
-    private float timeJump;
     private int lastPlatform = -10;
     void Start()
     {
@@ -23,7 +22,6 @@ public class SpawnPlatform : MonoBehaviour
         }
 
         aStarte = StartCoroutine("afterStart");
-        timeJump = 0;
         startPos = Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
         endPos = Camera.main.ScreenToWorldPoint(new Vector2(Camera.main.pixelWidth, Camera.main.pixelHeight));
         transform.position = new Vector3(endPos.x, 0, 0);
@@ -41,7 +39,7 @@ public class SpawnPlatform : MonoBehaviour
         }
         if (allDisconect == platformPool.Length)
         {
-            getInPool(transform.position);
+            getInPool(pool[0].GetComponent<Platform>());
             allDisconect = 0;
         }
         StopCoroutine(aStarte);
@@ -73,7 +71,7 @@ public class SpawnPlatform : MonoBehaviour
                 if (hasElementPoolAvaliable() && component.platform.last)
                 {
                     component.platform.last = false;
-                    getInPool(item.transform.position);
+                    getInPool(component);
                 }
 
                 if (component.checkCulling())
@@ -94,7 +92,7 @@ public class SpawnPlatform : MonoBehaviour
         item.GetComponent<Platform>().desablePlatform();
 
     }
-    public void getInPool(Vector3 activePlatform)
+    public void getInPool(Platform activePlatform)
     {
         int i = Random.Range(0, platformPool.Length);
         if (pool[i].activeInHierarchy)
@@ -106,38 +104,18 @@ public class SpawnPlatform : MonoBehaviour
         {
             pool[i].GetComponent<Platform>().enablePlatform();
             {
-                // Platform plataform = pool[i].GetComponent<Platform>();
-
-                // float endPlatform = 0;
-
-                // foreach (Transform item in plataform.targets)
-                // {
-                //     endPlatform = Mathf.Abs(item.localPosition.x);
-
-                // }
-
-                // Progress.globalSpeed * Time.deltaTime +
-
-                Vector3 pivotPlatform = pool[i].GetComponent<Platform>().pivot;
-                int r = Random.Range(0, 3);
+                Platform p = pool[i].GetComponent<Platform>();
+                Vector3 pivotPlatform = p.pivot;
                 Vector3 pos;
-                if (r - lastPlatform == 2)
-                {
-                    Debug.Log("tripleJump");
-                }
-                if (r - lastPlatform == 1)
-                {
-                    Debug.Log("doubleJump");
-                }
-                if ((r - lastPlatform == 0))
-                {
-                    Debug.Log("Jump");
-                }
+                
+                int neo = Random.Range(0, 3);
 
-                pos = new Vector3(pivotPlatform.x + Mathf.Abs(Physics2D.gravity.y), startPos.y + 2.8f * (endPos.y / 3) * r, 0);
+                activePlatform.activeJumpEffect(neo - lastPlatform);
+
+                pos = new Vector3(pivotPlatform.x + Mathf.Abs(Physics2D.gravity.y), startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
                 pool[i].GetComponent<Transform>().position += pos;
 
-                lastPlatform = r;
+                lastPlatform = neo;
             }
         }
         return;

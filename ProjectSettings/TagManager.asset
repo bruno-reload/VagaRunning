@@ -9,7 +9,8 @@ TagManager:
   - water
   - target
   - startTarget
-  - mushroom
+  - mushroomDouble
+  - mushroomTriple
   layers:
   - Default
   - TransparentFX

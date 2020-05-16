@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4826710751695160989}
   m_Layer: 0
   m_Name: double
-  m_TagString: mushroom
+  m_TagString: mushroomDouble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8072b85de7560c974a8ff3296efa7047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 2
+  force: 1.5
 --- !u!61 &4826710751695160989
 BoxCollider2D:
   m_ObjectHideFlags: 0
