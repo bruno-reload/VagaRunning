@@ -53,18 +53,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\background\Background.cs" />
      <Compile Include="Assets\CameraControll.cs" />
-     <Compile Include="Assets\level\platform\Culling.cs" />
-     <Compile Include="Assets\level\platform\jump\Mushroom.cs" />
-     <Compile Include="Assets\level\platform\Platform.cs" />
+     <Compile Include="Assets\level\backgroundPrefab\Background.cs" />
+     <Compile Include="Assets\level\mushroomPrefab\Mushroom.cs" />
+     <Compile Include="Assets\level\platformPrefab\Culling.cs" />
+     <Compile Include="Assets\level\platformPrefab\Platform.cs" />
+     <Compile Include="Assets\level\playerPrefab\floor.cs" />
+     <Compile Include="Assets\level\playerPrefab\Player.cs" />
      <Compile Include="Assets\level\Progress.cs" />
      <Compile Include="Assets\level\SpawnPlatform.cs" />
-     <Compile Include="Assets\player\floor.cs" />
-     <Compile Include="Assets\player\Player.cs" />
-     <None Include="Assets\background\designer\Bacground.shader" />
+     <Compile Include="Assets\level\waterPrefab\Water.cs" />
+     <None Include="Assets\level\backgroundPrefab\designer\Bacground.shader" />
      <None Include="Assets\Vaga\freegui\png\README.txt" />
      <None Include="Assets\Vaga\Manual.txt" />
+     <None Include="Assets\level\waterPrefab\designer\water.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/home/bruno/Modelos/VagaRunning/VagaRunning/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

@@ -18,7 +18,7 @@ public class SpawnPlatform : MonoBehaviour
             pool[i] = Instantiate(platformPool[i]);
             pool[i].SetActive(false);
             pool[i].transform.SetParent(transform);
-            pool[i].transform.position = platformPool[i].GetComponent<Platform>().pivot + transform.position;
+            pool[i].transform.position = startPosition(pool[i]);
         }
 
         aStarte = StartCoroutine("afterStart");
@@ -79,12 +79,7 @@ public class SpawnPlatform : MonoBehaviour
                     setInPool(item);
                 }
             }
-
         }
-    }
-    private bool distanceMaxToJump()
-    {
-        return true;
     }
     private void setInPool(GameObject item)
     {
@@ -102,22 +97,29 @@ public class SpawnPlatform : MonoBehaviour
         }
         else
         {
+
             pool[i].GetComponent<Platform>().enablePlatform();
             {
                 Platform p = pool[i].GetComponent<Platform>();
                 Vector3 pivotPlatform = p.pivot;
                 Vector3 pos;
-                
                 int neo = Random.Range(0, 3);
 
-                activePlatform.activeJumpEffect(neo - lastPlatform);
+                activePlatform.enableJumpEffect(neo - lastPlatform);
+                pool[i].GetComponent<Platform>().desableJumpEffect();
 
-                pos = new Vector3(pivotPlatform.x + Mathf.Abs(Physics2D.gravity.y), startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
+                pos = new Vector3(startPosition(pool[i]).x - Physics2D.gravity.y, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
                 pool[i].GetComponent<Transform>().position += pos;
 
                 lastPlatform = neo;
             }
         }
         return;
+    }
+    public Vector3 startPosition(GameObject g)
+    {
+        Platform p = g.GetComponent<Platform>();
+        return new Vector3(transform.position.x + p.pivot.x, 0, 0);
+
     }
 }
