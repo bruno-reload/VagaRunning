@@ -8,7 +8,7 @@ public class Water : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("player is dead");
+            other.GetComponent<Player>().dead = true;
         }
     }
 }

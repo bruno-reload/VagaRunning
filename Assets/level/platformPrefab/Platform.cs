@@ -68,7 +68,10 @@ public class Platform : MonoBehaviour
     }
     private void movePlatform()
     {
-        transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
+        if (!GameObject.FindWithTag("Player").GetComponent<Player>().dead)
+        {
+            transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
+        }
     }
     public bool checkCulling()
     {

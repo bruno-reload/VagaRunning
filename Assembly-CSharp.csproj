@@ -53,8 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CameraControll.cs" />
      <Compile Include="Assets\level\backgroundPrefab\Background.cs" />
+     <Compile Include="Assets\level\camera\CameraControll.cs" />
+     <Compile Include="Assets\level\camera\CustomImage.cs" />
      <Compile Include="Assets\level\mushroomPrefab\Mushroom.cs" />
      <Compile Include="Assets\level\platformPrefab\Culling.cs" />
      <Compile Include="Assets\level\platformPrefab\Platform.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\level\Progress.cs" />
      <Compile Include="Assets\level\SpawnPlatform.cs" />
      <Compile Include="Assets\level\waterPrefab\Water.cs" />
+     <None Include="Assets\level\camera\cam.shader" />
      <None Include="Assets\level\backgroundPrefab\designer\Bacground.shader" />
      <None Include="Assets\Vaga\freegui\png\README.txt" />
      <None Include="Assets\Vaga\Manual.txt" />

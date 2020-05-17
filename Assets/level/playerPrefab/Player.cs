@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public bool onFloor = false;
+    public bool dead = false;
+    public bool readyToDie = false;
 
     // jump factor float y = -4 * Mathf.Pow(Time.deltaTime % 1, 2) + 4 * (Time.deltaTime % 1);
     private void Start()
@@ -28,26 +30,41 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         speed = Progress.globalSpeed;
-        if (onFloor)
+        if (!dead)
         {
-            animation.SetBool("floor", true);
-            animation.SetFloat("speedX", 1);
-            if (Input.GetKeyUp(KeyCode.A))
+            animation.SetBool("dead", false);
+            if (onFloor)
             {
-                rigidbody.velocity = Vector2.up * speed;
-                onFloor = false;
+                animation.SetBool("floor", true);
+                animation.SetFloat("speedX", 1);
+                if (Input.GetKeyUp(KeyCode.A))
+                {
+                    rigidbody.velocity = Vector2.up * speed;
+                    onFloor = false;
+                }
+            }
+            if (!onFloor)
+            {
+                animation.SetBool("floor", false);
+                if (rigidbody.velocity.y < 0)
+                {
+                    animation.SetFloat("speedY", -1);
+                }
+                if (rigidbody.velocity.y > 0)
+                {
+                    animation.SetFloat("speedY", 1);
+                }
             }
         }
-        if (!onFloor)
+        else
         {
-            animation.SetBool("floor", false);
-            if (rigidbody.velocity.y < 0)
+            if (readyToDie)
             {
-                animation.SetFloat("speedY", -1);
-            }
-            if (rigidbody.velocity.y > 0)
-            {
-                animation.SetFloat("speedY", 1);
+                animation.SetBool("dead", true);
+                animation.SetBool("floor", true);
+                animation.SetFloat("speedY", 0);
+                animation.SetFloat("speedX", 0);
+                rigidbody.simulated = false;
             }
         }
     }

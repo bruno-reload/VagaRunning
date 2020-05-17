@@ -35,5 +35,9 @@ public class Background : MonoBehaviour
             }
             renderer.material.SetFloat("_V", Mathf.Lerp(renderer.material.GetFloat("_V"), VDirection, speedFactor * Time.deltaTime));
         }
+        
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().dead){
+            renderer.material.SetFloat("_Stop",0);
+        }
     }
 }
