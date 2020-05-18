@@ -46,12 +46,12 @@
 
             fixed4 fragment (v2f i) : SV_Target
             {
-
+                float verticalSpeed = i.uv.x;
                 if(_Stop >= 0.999){
-                    i.uv.x += _H * _Time.y;
+                    verticalSpeed = i.uv.x + _H * _Time.y;
                 }
                 
-                fixed4 col = tex2D(_MainTex, float2(i.uv.x,i.uv.y + _V/4));
+                fixed4 col = tex2D(_MainTex, float2(verticalSpeed,i.uv.y + _V/4));
                 return col;
             }
             ENDCG

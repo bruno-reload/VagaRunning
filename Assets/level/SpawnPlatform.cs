@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPlatform : MonoBehaviour
+public class SpawnPlatform : MonoBehaviour, FlowControll
 {
     public GameObject[] platformPool;
     private GameObject[] pool;
@@ -121,5 +121,29 @@ public class SpawnPlatform : MonoBehaviour
         Platform p = g.GetComponent<Platform>();
         return new Vector3(transform.position.x + p.pivot.x, 0, 0);
 
+    }
+
+    public void pause()
+    {
+        if(pool == null){
+            return;
+        }
+        foreach (GameObject item in pool)
+        {
+            if (item.activeInHierarchy)
+            {
+                item.GetComponent<Platform>().pause();
+            }
+        }
+    }
+    public void resume()
+    {
+        foreach (GameObject item in pool)
+        {
+            if (item.activeInHierarchy)
+            {
+                item.GetComponent<Platform>().resume();
+            }
+        }
     }
 }

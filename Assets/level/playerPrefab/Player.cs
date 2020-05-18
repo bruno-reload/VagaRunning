@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, FlowControll
 {
     public float speed = 0;
     [HideInInspector]
@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private new Animator animation;
     public Coroutine corrotine { get; private set; }
     private Collider2D childrenCollide;
-    public bool inGame = false;
+    private bool inGame = false;
 
     [HideInInspector]
     public bool onFloor = false;
@@ -39,23 +39,37 @@ public class Player : MonoBehaviour
         animation = GetComponentInChildren<Animator>();
         childrenCollide = GetComponentInChildren<Collider2D>();
         animation.SetBool("start", true);
+        animation.enabled = true;
     }
-    public void playerRun()
+    private void playerRun()
     {
-        
         animation.SetBool("floor", true);
+        animation.SetFloat("speedX", 0.5f);
+        Invoke("normalizeAnimationSpeed",2);
+    }
+    private void normalizeAnimationSpeed()
+    {
         animation.SetFloat("speedX", 1);
-        inGame = true;
     }
     public void pause()
     {
+        if (!animation)
+        {
+            animation = GetComponentInChildren<Animator>();
+            rigidbody = GetComponent<Rigidbody2D>();
+        }
         animation.enabled = false;
         rigidbody.simulated = false;
+
+        inGame = false;
     }
     public void resume()
     {
         animation.enabled = true;
         rigidbody.simulated = true;
+        inGame = true;
+
+        playerRun();
     }
     public void playerDead()
     {

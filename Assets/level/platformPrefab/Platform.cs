@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class Platform : MonoBehaviour, FlowControll
 {
     public Vector3 pivot;
     public ArrayList endTarget;
@@ -66,9 +66,13 @@ public class Platform : MonoBehaviour
                 }
             }
     }
+
+    public void pause(){}
+    public void resume(){}
     private void movePlatform()
     {
-        if (!GameObject.FindWithTag("Player").GetComponent<Player>().dead)
+        Player p = GameObject.FindWithTag("Player").GetComponent<Player>();
+        if (!p.dead)
         {
             transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
         }

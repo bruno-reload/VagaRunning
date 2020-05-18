@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class UiManege : MonoBehaviour
 {
-    private Player player;
-    private Background background;
+    private FlowControll player;
+    private FlowControll background;
+    private FlowControll uiBackground;
+
+    private FlowControll spawnPlatform;
+    private Progress progress;
 
     private void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         background = GameObject.FindWithTag("Background").GetComponent<Background>();
+        uiBackground = GameObject.FindWithTag("transition").GetComponent<UiBackground>();
+        spawnPlatform = GameObject.FindWithTag("spawnPlatform").GetComponent<SpawnPlatform>();
+
+        progress = GameObject.FindWithTag("speedControll").GetComponent<Progress>();
+        pauseGame();
+    }
+
+   
+    public void startGame()
+    {
+        Invoke("playGame",1);
+        uiBackground.resume();
     }
     public void playGame()
     {
-        GameObject.FindWithTag("speedControll").GetComponent<Progress>().speed = 10;
-        player.playerRun();
+        progress.speed = 10;
+
         player.resume();
-        // background.resume();
+        background.resume();
+        spawnPlatform.resume();
     }
-    public void restart(){
+    public void restart()
+    {
 
     }
     public void showUi(GameObject ui)
@@ -32,9 +50,11 @@ public class UiManege : MonoBehaviour
     }
     public void pauseGame()
     {
-        GameObject.FindWithTag("speedControll").GetComponent<Progress>().speed = 0;
+        progress.speed = 0;
+
         player.pause();
         background.pause();
+        spawnPlatform.pause();
     }
     public void quitGame()
     {
