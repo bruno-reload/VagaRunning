@@ -12,6 +12,8 @@ TagManager:
   - mushroomDouble
   - mushroomTriple
   - sow
+  - interface
+  - speedControll
   layers:
   - Default
   - TransparentFX

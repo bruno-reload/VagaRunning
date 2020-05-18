@@ -9,6 +9,7 @@ public class CustomImage : MonoBehaviour
     private Vector2 pos;
     private float radius;
     private Vector2 screen;
+    public Texture inTexture;
     public float factorRadius = 1;
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {

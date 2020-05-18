@@ -10,34 +10,46 @@ public class Background : MonoBehaviour
     [HideInInspector]
     private new Renderer renderer;
     private float y = 0;
+    private bool status = false;
     void Start()
     {
         renderer = GetComponent<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    // Update is called once per frame
+    public void pause()
+    {
+        status = false;
+    }
+    public void resume()
+    {
+        status = false;
+    }
     void Update()
     {
-        renderer.material.SetFloat("_H", Progress.globalSpeed / 20);
-        float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
-        if (player.onFloor)
-            y = 0.0f;
-        else
+        if (status)
         {
-            if (VDirection > 0)
+            renderer.material.SetFloat("_H", Progress.globalSpeed / 20);
+            float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
+            if (player.onFloor)
+                y = 0.0f;
+            else
             {
-                y += Time.deltaTime;
+                if (VDirection > 0)
+                {
+                    y += Time.deltaTime;
+                }
+                if (VDirection < 0)
+                {
+                    y -= Time.deltaTime;
+                }
+                renderer.material.SetFloat("_V", Mathf.Lerp(renderer.material.GetFloat("_V"), VDirection, speedFactor * Time.deltaTime));
             }
-            if (VDirection < 0)
+
+            if (GameObject.FindWithTag("Player").GetComponent<Player>().dead)
             {
-                y -= Time.deltaTime;
+                renderer.material.SetFloat("_Stop", 0);
             }
-            renderer.material.SetFloat("_V", Mathf.Lerp(renderer.material.GetFloat("_V"), VDirection, speedFactor * Time.deltaTime));
-        }
-        
-        if (GameObject.FindWithTag("Player").GetComponent<Player>().dead){
-            renderer.material.SetFloat("_Stop",0);
         }
     }
 }

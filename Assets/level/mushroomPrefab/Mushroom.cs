@@ -13,7 +13,7 @@ public class Mushroom : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (Mathf.Sign(other.GetComponent<Rigidbody2D>().velocity.y) < 0)
+            if (other.GetComponent<Rigidbody2D>().velocity.y < -.2f)
             {
                 GetComponentInChildren<Animator>().SetBool("jump", true);
                 other.GetComponent<Rigidbody2D>().velocity = Vector3.up * Progress.globalSpeed * force;
