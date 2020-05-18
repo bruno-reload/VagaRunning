@@ -67,12 +67,14 @@ public class Platform : MonoBehaviour, FlowControll
             }
     }
 
-    public void pause(){}
-    public void resume(){}
+    public void pause() { }
+    public void resume() { }
+    public void restart() { }
+    public void dead() { }
     private void movePlatform()
     {
         Player p = GameObject.FindWithTag("Player").GetComponent<Player>();
-        if (!p.dead)
+        if (!p.death)
         {
             transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
         }

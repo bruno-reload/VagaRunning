@@ -44,6 +44,10 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
         }
         StopCoroutine(aStarte);
     }
+    public void restart()
+    {
+
+    }
     bool hasElementPoolAvaliable()
     {
         int inactive = 0;
@@ -123,9 +127,11 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
 
     }
 
+    public void dead() { }
     public void pause()
     {
-        if(pool == null){
+        if (pool == null)
+        {
             return;
         }
         foreach (GameObject item in pool)

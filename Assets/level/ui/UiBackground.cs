@@ -26,6 +26,10 @@ public class UiBackground : MonoBehaviour, FlowControll
             }
         }
     }
+    public void restart()
+    {
+
+    }
     public void transition()
     {
         status = false;
@@ -38,4 +42,5 @@ public class UiBackground : MonoBehaviour, FlowControll
     {
         status = false;
     }
+    public void dead() { }
 }

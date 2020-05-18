@@ -1114,6 +1114,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: inGame
       objectReference: {fileID: 0}
+    - target: {fileID: 856147894699778583, guid: d5cce57d4310a6f0bb7d7da898518cc9,
+        type: 3}
+      propertyPath: m_TagString
+      value: inGame
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5cce57d4310a6f0bb7d7da898518cc9, type: 3}
 --- !u!224 &577931797816044860 stripped
@@ -1159,6 +1164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528697296351091409, guid: e31400c95a9517d6587ed747274d44fb,
+        type: 3}
+      propertyPath: m_TagString
+      value: endGame
       objectReference: {fileID: 0}
     - target: {fileID: 4528697296351091410, guid: e31400c95a9517d6587ed747274d44fb,
         type: 3}

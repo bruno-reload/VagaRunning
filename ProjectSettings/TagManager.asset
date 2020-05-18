@@ -16,6 +16,13 @@ TagManager:
   - speedControll
   - transition
   - spawnPlatform
+  - endGame
+  - inGame
+  - sGame
+  - cGame
+  - starInGame
+  - starEndGame
+  - moneyEndGame
   layers:
   - Default
   - TransparentFX

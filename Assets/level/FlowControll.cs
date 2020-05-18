@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface FlowControll 
+public interface FlowControll
 {
     void pause();
     void resume();
+    void restart();
+    void dead();
 }

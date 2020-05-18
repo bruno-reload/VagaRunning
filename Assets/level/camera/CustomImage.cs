@@ -11,6 +11,7 @@ public class CustomImage : MonoBehaviour
     private Vector2 screen;
     public Texture inTexture;
     public float factorRadius = 1;
+    private bool enable = true;
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
         Graphics.Blit(src, dest, effect);
@@ -23,7 +24,7 @@ public class CustomImage : MonoBehaviour
     private void Update()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        if (player.GetComponent<Player>().dead)
+        if (player.GetComponent<Player>().death)
         {
 
             Vector2 pos = player.GetComponent<Transform>().position;
@@ -33,17 +34,21 @@ public class CustomImage : MonoBehaviour
             effect.SetVector("_PlayerPosition", new Vector2(1 - playerOnScreen.x - 0.55f, playerOnScreen.y - 0.5f));
             effect.SetFloat("_Radius", radius);
             radius -= Time.deltaTime * factorRadius;
-            if (radius <= .15f)
+            if (radius <= .15f && enable)
             {
                 radius = .15f;
-
-                player.GetComponent<Player>().readyToDie = true;
+                Invoke("stopwatch", 1);
             }
         }
         else
         {
             effect.SetFloat("_Radius", radius);
+            enable = true;
         }
+    }
+    private void stopwatch()
+    {
+        enable = false;
     }
 
 }

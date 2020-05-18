@@ -16,12 +16,9 @@ public class Player : MonoBehaviour, FlowControll
 
     [HideInInspector]
     public bool onFloor = false;
-    public bool dead = false;
+    public bool death = false;
     public bool readyToDie = false;
     private init dataStart;
-
-    // jump factor float y = -4 * Mathf.Pow(Time.deltaTime % 1, 2) + 4 * (Time.deltaTime % 1);
-
     public struct init
     {
         public Vector3 pos;
@@ -45,7 +42,7 @@ public class Player : MonoBehaviour, FlowControll
     {
         animation.SetBool("floor", true);
         animation.SetFloat("speedX", 0.5f);
-        Invoke("normalizeAnimationSpeed",2);
+        Invoke("normalizeAnimationSpeed", 1);
     }
     private void normalizeAnimationSpeed()
     {
@@ -73,12 +70,16 @@ public class Player : MonoBehaviour, FlowControll
     }
     public void playerDead()
     {
+        rigidbody.simulated = false;
+        death = true;
+        Invoke("lateDead", 0.6f);
+    }
+    private void lateDead()
+    {
         animation.SetBool("dead", true);
         animation.SetBool("floor", true);
         animation.SetFloat("speedY", 0);
         animation.SetFloat("speedX", 0);
-        rigidbody.simulated = false;
-        dead = true;
     }
     public void playerJump()
     {
@@ -92,6 +93,12 @@ public class Player : MonoBehaviour, FlowControll
             animation.SetFloat("speedY", 1);
         }
     }
+    public void restart()
+    {
+
+    }
+
+    public void dead() { }
     public void aplicatioForce(float force = 1)
     {
         rigidbody.velocity = Vector2.up * force;
@@ -101,7 +108,7 @@ public class Player : MonoBehaviour, FlowControll
         speed = Progress.globalSpeed;
         if (inGame)
         {
-            if (!dead)
+            if (!death)
             {
                 animation.SetBool("dead", false);
                 if (onFloor)

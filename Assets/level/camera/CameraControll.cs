@@ -10,8 +10,6 @@ public class CameraControll : MonoBehaviour
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
     }
-
-    // Update is called once per frame
     void Update()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;

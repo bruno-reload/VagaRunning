@@ -15,28 +15,31 @@ public class Background : MonoBehaviour, FlowControll
     {
         renderer = GetComponent<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        renderer.material.SetFloat("_H", 0);
     }
 
     public void pause()
     {
-        if (!renderer)
-        {
-            renderer = GetComponent<Renderer>();
-        }
-        renderer.material.SetFloat("_Stop", 0);
         status = false;
     }
     public void resume()
     {
-        renderer.material.SetFloat("_Stop", 1);
-        status = false;
+        status = true;
+    }
+    public void restart()
+    {
+        resume();
+    }
+    public void dead()
+    {
+        pause();
     }
     void Update()
     {
         if (status)
         {
-            renderer.material.SetFloat("_H",Mathf.Lerp(renderer.material.GetFloat("_H"),1,0.001f));
             float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
+            renderer.material.SetFloat("_H", Mathf.Lerp(renderer.material.GetFloat("_H"), 1, 0.005f * Time.deltaTime));
             if (player.onFloor)
                 y = 0.0f;
             else
@@ -51,11 +54,10 @@ public class Background : MonoBehaviour, FlowControll
                 }
                 renderer.material.SetFloat("_V", Mathf.Lerp(renderer.material.GetFloat("_V"), VDirection, speedFactor * Time.deltaTime));
             }
-
-            if (GameObject.FindWithTag("Player").GetComponent<Player>().dead)
-            {
-                renderer.material.SetFloat("_Stop", 0);
-            }
+        }
+        else
+        {
+            renderer.material.SetFloat("_H", 0);
         }
     }
 }
