@@ -90,7 +90,7 @@ public class UiManege : MonoBehaviour
     public int getStar()
     {
         GameObject.FindWithTag("starEndGame").GetComponent<TextMeshProUGUI>().text = star.ToString(); 
-        GameObject.FindWithTag("moneyEndGame").GetComponent<TextMeshProUGUI>().text = Time.time.ToString();
+        GameObject.FindWithTag("moneyEndGame").GetComponent<TextMeshProUGUI>().text = Time.time.ToString("0.00");
         return star;
     }
     public void restart()
