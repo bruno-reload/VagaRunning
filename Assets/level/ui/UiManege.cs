@@ -17,7 +17,7 @@ public class UiManege : MonoBehaviour
     private IEnumerator twOut;
     public Platform initPlatform;
     public float animationUiSpeed;
-
+    private Box[] box;
     private int star = 0;
     private float money = 0;
     private void Start()
@@ -26,6 +26,12 @@ public class UiManege : MonoBehaviour
         background = GameObject.FindWithTag("Background").GetComponent<Background>();
         uiBackground = GameObject.FindWithTag("transition").GetComponent<UiBackground>();
         spawnPlatform = GameObject.FindWithTag("spawnPlatform").GetComponent<SpawnPlatform>();
+
+        box = new Box[GameObject.FindGameObjectsWithTag("box").Length];
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("box").Length; i++)
+        {
+            box[i] = GameObject.FindGameObjectsWithTag("box")[i].GetComponent<Box>();
+        }
 
         progress = GameObject.FindWithTag("speedControll").GetComponent<Progress>();
         pauseGame();
@@ -58,6 +64,10 @@ public class UiManege : MonoBehaviour
         player.resume();
         background.resume();
         spawnPlatform.resume();
+        foreach (Box item in box)
+        {
+            item.resume();
+        }
 
         twOut = tweenOut(sGame.transform, new Vector3(0, 0, 0));
 
@@ -155,7 +165,10 @@ public class UiManege : MonoBehaviour
         uiBackground.restart();
         spawnPlatform.restart();
         initPlatform.restart();
-
+        foreach (Box item in box)
+        {
+            item.restart();
+        }
         resume();
 
         showUi(inGame);
@@ -186,6 +199,11 @@ public class UiManege : MonoBehaviour
         player.pause();
         background.pause();
         spawnPlatform.pause();
+
+        foreach (Box item in box)
+        {
+            item.pause();
+        }
 
         StopAllCoroutines();
         StartCoroutine(twIn);

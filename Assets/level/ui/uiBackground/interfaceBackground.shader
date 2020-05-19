@@ -102,9 +102,15 @@
             {
                 IN.texcoord = mul(IN.texcoord - float2(.5,.5),  float2x2(cos(_Angle),-sin(_Angle),sin(_Angle),cos(_Angle)));
 
+
+                if(_Slide <= 0){
+                    IN.texcoord.x += _SinTime;
+                }
+
                 half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
 
                 color = step(_Slide - 1,IN.texcoord.x)*color;
+
 
                 #ifdef UNITY_UI_CLIP_RECT
                     color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);

@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, FlowControll
     public Coroutine corrotine { get; private set; }
     private Collider2D childrenCollide;
     public bool inGame = false;
+    private UiManege uiManege;
 
     [HideInInspector]
     public bool onFloor = false;
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour, FlowControll
         childrenCollide = GetComponentInChildren<Collider2D>();
         animation.SetBool("start", true);
         animation.enabled = true;
+        uiManege = GameObject.FindWithTag("interface").GetComponent<UiManege>();
     }
     private void playerRun()
     {
@@ -105,7 +107,12 @@ public class Player : MonoBehaviour, FlowControll
     }
     void FixedUpdate()
     {
-        speed = Progress.globalSpeed*.7f;
+        if (transform.position.x < Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x)
+        {
+            uiManege.dead();
+        }
+
+        speed = Progress.globalSpeed * .7f;
         if (inGame)
         {
             if (!death)

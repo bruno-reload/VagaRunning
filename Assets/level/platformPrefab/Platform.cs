@@ -8,6 +8,8 @@ public class Platform : MonoBehaviour, FlowControll
     public ArrayList endTarget;
     public check platform = new check();
     private GameObject[] mushroom;
+
+    public GameObject[] package;
     private void Awake()
     {
         endTarget = new ArrayList();
@@ -110,6 +112,11 @@ public class Platform : MonoBehaviour, FlowControll
             return;
         }
         mushroom[i - 1].SetActive(true);
+        foreach (GameObject item in package)
+        {
+            item.SetActive(false);
+        }
+        package[i % package.Length].SetActive(true);
     }
     public void desableJumpEffect()
     {

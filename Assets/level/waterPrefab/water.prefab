@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7793249960425758384}
   m_Layer: 0
   m_Name: water
-  m_TagString: Untagged
+  m_TagString: deep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679d96c19bc573bd488ba58ab376adf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endGame: {fileID: 4528697296351091409, guid: e31400c95a9517d6587ed747274d44fb, type: 3}
-  inGame: {fileID: 856147894699778583, guid: d5cce57d4310a6f0bb7d7da898518cc9, type: 3}
+  uiManege: {fileID: 0}
 --- !u!61 &5497547498725164551
 BoxCollider2D:
   m_ObjectHideFlags: 0

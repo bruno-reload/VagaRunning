@@ -23,8 +23,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _UIBG:
+        m_Texture: {fileID: 2800000, guid: 2cd1092eb8b9d9e82af81be00291b5f6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UIBackground:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _ActiveDeadEffect: 0
     - _Radius: 1
     m_Colors:
-    - _PlayerPosition: {r: -0.050010204, g: 0.00018274784, b: 0, a: 0}
+    - _PlayerPosition: {r: 0.4543835, g: 0.00002783537, b: 0, a: 0}

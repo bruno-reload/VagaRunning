@@ -6,12 +6,16 @@
         _ActiveDeadEffect("Dead", Range(0,1)) = 0
         _PlayerPosition("Player",Vector) = (0,0,0)
         _Radius("Radius", float) = 5
+        _UIBG("UI Background", 2D) = "white" {}
     }
     SubShader
     {
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 
         Pass
         {
+            ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -30,6 +34,7 @@
                 float4 vertex : SV_POSITION;
             };
 
+            sampler2D _UIBG;
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float _ActiveDeadEffect;
@@ -50,9 +55,14 @@
             }
             fixed4 frag (v2f i) : SV_Target
             {
-                float4 col = tex2D(_MainTex,i.uv);
+                float4 col;
+                if((circleShaper(_PlayerPosition.xy + i.uv,_Radius)) >= 0.5){
+                    col.xyzw = tex2D(_UIBG,i.uv);
+                }
+                else{
+                    col.xyzw = tex2D(_MainTex,i.uv);
+                }
 
-                col *= 1- circleShaper(_PlayerPosition.xy + i.uv,_Radius);
                 return col;
             }
             ENDCG

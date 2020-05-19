@@ -57,6 +57,8 @@
      <Compile Include="Assets\level\camera\CameraControll.cs" />
      <Compile Include="Assets\level\camera\CustomImage.cs" />
      <Compile Include="Assets\level\FlowControll.cs" />
+     <Compile Include="Assets\level\items\prefab\box\Box.cs" />
+     <Compile Include="Assets\level\items\prefab\shrub\Shrub.cs" />
      <Compile Include="Assets\level\items\prefab\star\Star.cs" />
      <Compile Include="Assets\level\mushroomPrefab\Mushroom.cs" />
      <Compile Include="Assets\level\platformPrefab\Culling.cs" />
