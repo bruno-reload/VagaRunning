@@ -28,7 +28,7 @@ public class UiBackground : MonoBehaviour, FlowControll
     }
     public void restart()
     {
-
+        bk.SetFloat("_Slide", 0);
     }
     public void transition()
     {

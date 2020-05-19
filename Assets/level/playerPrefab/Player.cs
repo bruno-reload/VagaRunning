@@ -65,7 +65,7 @@ public class Player : MonoBehaviour, FlowControll
         animation.enabled = true;
         rigidbody.simulated = true;
         inGame = true;
-
+        death = false;
         playerRun();
     }
     public void playerDead()
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour, FlowControll
     }
     public void restart()
     {
-
+        transform.position = new Vector3(0,1.9f,0);
     }
 
     public void dead() { }

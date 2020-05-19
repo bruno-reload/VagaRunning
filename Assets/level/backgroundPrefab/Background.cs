@@ -11,11 +11,12 @@ public class Background : MonoBehaviour, FlowControll
     private new Renderer renderer;
     private float y = 0;
     private bool status = false;
+    private float time;
+    private float lastStep = 0;
     void Start()
     {
         renderer = GetComponent<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        renderer.material.SetFloat("_H", 0);
     }
 
     public void pause()
@@ -36,10 +37,15 @@ public class Background : MonoBehaviour, FlowControll
     }
     void Update()
     {
+        float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
+
+
+
+
         if (status)
         {
-            float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
-            renderer.material.SetFloat("_H", Mathf.Lerp(renderer.material.GetFloat("_H"), 1, 0.005f * Time.deltaTime));
+            time = Time.time * speedFactor - lastStep;
+            renderer.material.SetFloat("_H", time);
             if (player.onFloor)
                 y = 0.0f;
             else
@@ -57,7 +63,8 @@ public class Background : MonoBehaviour, FlowControll
         }
         else
         {
-            renderer.material.SetFloat("_H", 0);
+            lastStep = Time.time * speedFactor - time;
         }
+
     }
 }

@@ -69,7 +69,10 @@ public class Platform : MonoBehaviour, FlowControll
 
     public void pause() { }
     public void resume() { }
-    public void restart() { }
+    public void restart()
+    {
+        transform.position = new Vector3(-pivot.x, transform.position.y, 0);
+    }
     public void dead() { }
     private void movePlatform()
     {

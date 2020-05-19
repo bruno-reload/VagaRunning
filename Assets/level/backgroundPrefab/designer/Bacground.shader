@@ -5,6 +5,7 @@
         _MainTex ("Texture", 2D) = "white" {}
         _H ("Horizontal speed", range(0, 1)) = 0
         _V("Vertical speed", Range(-1, 1)) = 0
+        _StopAnimation("Srop",Range(0,1)) = 1
     }
     SubShader
     {
@@ -33,6 +34,10 @@
             float4 _MainTex_ST;
             float _H;
             float _V;
+            float time = 0;
+            float _StopAnimation;
+            float lestStep;
+
             v2f vertex (appdata v)
             {
                 v2f o;
@@ -44,11 +49,7 @@
 
             fixed4 fragment (v2f i) : SV_Target
             {
-                float verticalSpeed = i.uv.x;
-                verticalSpeed = i.uv.x + _H * _Time.y;
-                
-                
-                fixed4 col = tex2D(_MainTex, float2(verticalSpeed,i.uv.y + _V/4));
+                fixed4 col = tex2D(_MainTex, float2(i.uv.x + _H,i.uv.y + _V/4));
                 return col;
             }
             ENDCG

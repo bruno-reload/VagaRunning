@@ -46,6 +46,11 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
     }
     public void restart()
     {
+        for (int i = 0; i < platformPool.Length; i++)
+        {
+            pool[i].GetComponent<Platform>().desablePlatform();
+        }
+        getInPool(pool[0].GetComponent<Platform>());
 
     }
     bool hasElementPoolAvaliable()

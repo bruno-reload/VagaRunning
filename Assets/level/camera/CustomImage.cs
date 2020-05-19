@@ -42,6 +42,7 @@ public class CustomImage : MonoBehaviour
         }
         else
         {
+            radius = 1;
             effect.SetFloat("_Radius", radius);
             enable = true;
         }
