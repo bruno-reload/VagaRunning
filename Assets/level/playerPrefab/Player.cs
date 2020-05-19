@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, FlowControll
     private new Animator animation;
     public Coroutine corrotine { get; private set; }
     private Collider2D childrenCollide;
-    private bool inGame = false;
+    public bool inGame = false;
 
     [HideInInspector]
     public bool onFloor = false;
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour, FlowControll
     }
     public void restart()
     {
-        transform.position = new Vector3(0,1.9f,0);
+        transform.position = new Vector3(0, 1.9f, 0);
     }
 
     public void dead() { }
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour, FlowControll
     }
     void FixedUpdate()
     {
-        speed = Progress.globalSpeed;
+        speed = Progress.globalSpeed*.7f;
         if (inGame)
         {
             if (!death)

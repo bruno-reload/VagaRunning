@@ -13,6 +13,7 @@ public class Background : MonoBehaviour, FlowControll
     private bool status = false;
     private float time;
     private float lastStep = 0;
+    private float speed = 0;
     void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -30,21 +31,21 @@ public class Background : MonoBehaviour, FlowControll
     public void restart()
     {
         resume();
+        speed = 0;
     }
     public void dead()
     {
         pause();
+        speed = 0;
     }
     void Update()
     {
+
         float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
-
-
-
-
         if (status)
         {
-            time = Time.time * speedFactor - lastStep;
+            speed = Mathf.Lerp(speed, Progress.globalSpeed/10, 0.001f * Time.deltaTime);
+            time = (Time.time * speedFactor - lastStep) * speed;
             renderer.material.SetFloat("_H", time);
             if (player.onFloor)
                 y = 0.0f;
@@ -63,7 +64,7 @@ public class Background : MonoBehaviour, FlowControll
         }
         else
         {
-            lastStep = Time.time * speedFactor - time;
+            lastStep = (Time.time * speedFactor - time) * speed;
         }
 
     }

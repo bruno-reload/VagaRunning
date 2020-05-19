@@ -117,7 +117,7 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
                 activePlatform.enableJumpEffect(neo - lastPlatform);
                 pool[i].GetComponent<Platform>().desableJumpEffect();
 
-                pos = new Vector3(startPosition(pool[i]).x - Physics2D.gravity.y, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
+                pos = new Vector3(1.7f * Progress.globalSpeed, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
                 pool[i].GetComponent<Transform>().position += pos;
 
                 lastPlatform = neo;

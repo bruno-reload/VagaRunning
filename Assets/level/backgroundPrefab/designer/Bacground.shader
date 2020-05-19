@@ -3,7 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _H ("Horizontal speed", range(0, 1)) = 0
+        _H ("Horizontal speed", float) = 0
         _V("Vertical speed", Range(-1, 1)) = 0
         _StopAnimation("Srop",Range(0,1)) = 1
     }

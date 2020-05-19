@@ -13,7 +13,6 @@ public class UiManege : MonoBehaviour
     private GameObject endGame = null;
     private GameObject inGame = null;
     public GameObject sGame;
-    public GameObject cGame;
     private IEnumerator twIn;
     private IEnumerator twOut;
     public Platform initPlatform;
@@ -42,12 +41,14 @@ public class UiManege : MonoBehaviour
                 inGame = item.gameObject;
             }
         }
+
+        sGame.transform.localScale = new Vector3(.6f, .6f, .6f);
     }
 
 
     public void startGame()
     {
-        Invoke("resume", 1);
+        resume();
         uiBackground.resume();
     }
     public void resume()
@@ -58,10 +59,15 @@ public class UiManege : MonoBehaviour
         background.resume();
         spawnPlatform.resume();
 
-        twOut = tweenOut(cGame.transform, new Vector3());
+        twOut = tweenOut(sGame.transform, new Vector3(0, 0, 0));
 
         StopAllCoroutines();
         StartCoroutine(twOut);
+        Invoke("lateResume", 0.4f);
+    }
+    private void lateResume()
+    {
+        hideUi(sGame);
     }
     public void dead()
     {
@@ -98,7 +104,7 @@ public class UiManege : MonoBehaviour
         while (endTween)
         {
             from.localScale = Vector3.Lerp(from.localScale, to, animationUiSpeed * Time.deltaTime);
-            if (Vector3.Distance(from.localScale, to) < 0.05f)
+            if (Vector3.Distance(from.localScale, to) < 0.1f)
             {
                 endTween = false;
             }
@@ -114,7 +120,7 @@ public class UiManege : MonoBehaviour
         while (endTween)
         {
             from.localScale = Vector3.Lerp(from.localScale, to, animationUiSpeed * Time.deltaTime);
-            if (Vector3.Distance(from.localScale, to) < 0.05f)
+            if (Vector3.Distance(from.localScale, to) < 0.1f)
             {
                 endTween = false;
             }
@@ -173,11 +179,16 @@ public class UiManege : MonoBehaviour
     }
     public void pauseGame()
     {
-        progress.speed = 0;
 
+        twIn = tweenIn(sGame.transform, new Vector3(1, 1, 1));
+
+        progress.speed = 0;
         player.pause();
         background.pause();
         spawnPlatform.pause();
+
+        StopAllCoroutines();
+        StartCoroutine(twIn);
     }
     public void quitGame()
     {

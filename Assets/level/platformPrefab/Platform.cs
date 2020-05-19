@@ -77,7 +77,7 @@ public class Platform : MonoBehaviour, FlowControll
     private void movePlatform()
     {
         Player p = GameObject.FindWithTag("Player").GetComponent<Player>();
-        if (!p.death)
+        if (!p.death && p.inGame)
         {
             transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
         }
