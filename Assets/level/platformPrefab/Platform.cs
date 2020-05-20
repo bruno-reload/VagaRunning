@@ -5,14 +5,13 @@ using UnityEngine;
 public class Platform : MonoBehaviour, FlowControll
 {
     public Vector3 pivot;
-    public ArrayList endTarget;
+    public Vector3 endTarget;
     public check platform = new check();
     private GameObject[] mushroom;
 
     public GameObject[] package;
     private void Awake()
     {
-        endTarget = new ArrayList();
         foreach (Transform item in GetComponentsInChildren<Transform>())
         {
 
@@ -22,7 +21,7 @@ public class Platform : MonoBehaviour, FlowControll
             }
             if (item.tag == "target")
             {
-                endTarget.Add(item);
+                endTarget = new Vector3(item.localPosition.x, 0, 0);
             }
         }
         platform.last = false;
@@ -51,7 +50,7 @@ public class Platform : MonoBehaviour, FlowControll
         platform.last = false;
         platform.visibleEndPlatform = false;
         gameObject.SetActive(false);
-        transform.position = GetComponentInParent<Transform>().position + pivot;
+        transform.localPosition = GetComponentInParent<SpawnPlatform>().pivot - new Vector3(pivot.x,0,0);
     }
     private void endOfPlatformWhenVisible()
     {
@@ -81,7 +80,7 @@ public class Platform : MonoBehaviour, FlowControll
         Player p = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (!p.death && p.inGame)
         {
-            transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed / 2, 0, 0);
+            transform.position -= new Vector3(Time.deltaTime * Progress.globalSpeed/2, 0, 0);
         }
     }
     public bool checkCulling()
@@ -116,7 +115,7 @@ public class Platform : MonoBehaviour, FlowControll
         {
             item.SetActive(false);
         }
-        package[i % package.Length].SetActive(true);
+        // package[i % package.Length].SetActive(true);
     }
     public void desableJumpEffect()
     {

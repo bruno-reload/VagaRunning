@@ -69,6 +69,7 @@
      <Compile Include="Assets\level\SpawnPlatform.cs" />
      <Compile Include="Assets\level\ui\UiBackground.cs" />
      <Compile Include="Assets\level\ui\UiManege.cs" />
+     <Compile Include="Assets\level\waterPrefab\Deep.cs" />
      <Compile Include="Assets\level\waterPrefab\Water.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

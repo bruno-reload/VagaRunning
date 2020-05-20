@@ -26,6 +26,7 @@ public class UiManege : MonoBehaviour
         background = GameObject.FindWithTag("Background").GetComponent<Background>();
         uiBackground = GameObject.FindWithTag("transition").GetComponent<UiBackground>();
         spawnPlatform = GameObject.FindWithTag("spawnPlatform").GetComponent<SpawnPlatform>();
+        progress = GameObject.FindWithTag("speedControll").GetComponent<Progress>();
 
         box = new Box[GameObject.FindGameObjectsWithTag("box").Length];
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("box").Length; i++)
@@ -64,6 +65,8 @@ public class UiManege : MonoBehaviour
         player.resume();
         background.resume();
         spawnPlatform.resume();
+        progress.resume();
+
         foreach (Box item in box)
         {
             item.resume();
@@ -81,7 +84,7 @@ public class UiManege : MonoBehaviour
     }
     public void dead()
     {
-        (player as Player).playerDead();
+        (player as Player).dead();
         (background as Background).dead();
 
         if (!endGame || !inGame)
@@ -165,6 +168,8 @@ public class UiManege : MonoBehaviour
         uiBackground.restart();
         spawnPlatform.restart();
         initPlatform.restart();
+        progress.restart();
+
         foreach (Box item in box)
         {
             item.restart();
@@ -199,6 +204,7 @@ public class UiManege : MonoBehaviour
         player.pause();
         background.pause();
         spawnPlatform.pause();
+        progress.pause();
 
         foreach (Box item in box)
         {

@@ -8,23 +8,25 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
     private GameObject[] pool;
     private Vector3 startPos;
     private Vector3 endPos;
+    public Vector3 pivot;
     private Coroutine aStarte;
     private int lastPlatform = -10;
     void Start()
     {
         pool = new GameObject[platformPool.Length];
+        pivot = transform.position;
         for (int i = 0; i < platformPool.Length; i++)
         {
             pool[i] = Instantiate(platformPool[i]);
-            pool[i].SetActive(false);
             pool[i].transform.SetParent(transform);
-            pool[i].transform.position = startPosition(pool[i]);
+            pool[i].GetComponent<Platform>().desablePlatform();
         }
 
         aStarte = StartCoroutine("afterStart");
         startPos = Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
         endPos = Camera.main.ScreenToWorldPoint(new Vector2(Camera.main.pixelWidth, Camera.main.pixelHeight));
         transform.position = new Vector3(endPos.x, 0, 0);
+
     }
     IEnumerator afterStart()
     {
@@ -80,6 +82,7 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
                 if (hasElementPoolAvaliable() && component.platform.last)
                 {
                     component.platform.last = false;
+
                     getInPool(component);
                 }
 
@@ -114,10 +117,13 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
                 Vector3 pos;
                 int neo = Random.Range(0, 3);
 
+
                 activePlatform.enableJumpEffect(neo - lastPlatform);
                 pool[i].GetComponent<Platform>().desableJumpEffect();
 
-                pos = new Vector3(1.7f * Progress.globalSpeed, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
+                float endPlatform = Mathf.Abs(p.endTarget.x - transform.position.x) / 2;
+
+                pos = new Vector3((Mathf.Sqrt(Progress.globalSpeed * .2f) / Mathf.Abs(Physics2D.gravity.y)) - 4, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
                 pool[i].GetComponent<Transform>().position += pos;
 
                 lastPlatform = neo;
@@ -125,13 +131,6 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
         }
         return;
     }
-    public Vector3 startPosition(GameObject g)
-    {
-        Platform p = g.GetComponent<Platform>();
-        return new Vector3(transform.position.x + p.pivot.x, 0, 0);
-
-    }
-
     public void dead() { }
     public void pause()
     {

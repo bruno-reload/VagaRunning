@@ -44,6 +44,7 @@ public class Player : MonoBehaviour, FlowControll
     {
         animation.SetBool("floor", true);
         animation.SetFloat("speedX", 0.5f);
+        animation.SetFloat("speedY", 0f);
         Invoke("normalizeAnimationSpeed", 1);
     }
     private void normalizeAnimationSpeed()
@@ -70,12 +71,6 @@ public class Player : MonoBehaviour, FlowControll
         death = false;
         playerRun();
     }
-    public void playerDead()
-    {
-        rigidbody.simulated = false;
-        death = true;
-        Invoke("lateDead", 0.6f);
-    }
     private void lateDead()
     {
         animation.SetBool("dead", true);
@@ -97,27 +92,33 @@ public class Player : MonoBehaviour, FlowControll
     }
     public void restart()
     {
+        animation.SetBool("dead", false);
         transform.position = new Vector3(0, 1.9f, 0);
+        playerRun();
     }
 
-    public void dead() { }
+    public void dead()
+    {
+        rigidbody.simulated = false;
+        death = true;
+        Invoke("lateDead", 0.6f);
+    }
     public void aplicatioForce(float force = 1)
     {
         rigidbody.velocity = Vector2.up * force;
     }
     void FixedUpdate()
     {
+
+        speed = Progress.globalSpeed * .6f;
         if (transform.position.x < Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x)
         {
             uiManege.dead();
         }
-
-        speed = Progress.globalSpeed * .7f;
         if (inGame)
         {
             if (!death)
             {
-                animation.SetBool("dead", false);
                 if (onFloor)
                 {
                     playerRun();
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour, FlowControll
             {
                 if (readyToDie)
                 {
-                    playerDead();
+                    dead();
                 }
             }
         }

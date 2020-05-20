@@ -35,4 +35,4 @@ Material:
     - _ActiveDeadEffect: 0
     - _Radius: 1
     m_Colors:
-    - _PlayerPosition: {r: 0.4543835, g: 0.00002783537, b: 0, a: 0}
+    - _PlayerPosition: {r: 0, g: 0, b: 0, a: 0}

@@ -19,6 +19,7 @@ public class CustomImage : MonoBehaviour
     private void Start()
     {
         effect.SetFloat("_ActiveDeadEffect", 0);
+        effect.SetVector("_PlayerPosition",Vector3.zero);
         radius = 1;
     }
     private void Update()

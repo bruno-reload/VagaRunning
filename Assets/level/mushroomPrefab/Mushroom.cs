@@ -16,7 +16,7 @@ public class Mushroom : MonoBehaviour
             if (other.GetComponent<Rigidbody2D>().velocity.y < -.2f)
             {
                 GetComponentInChildren<Animator>().SetBool("jump", true);
-                other.GetComponent<Rigidbody2D>().velocity = Vector3.up * Progress.globalSpeed * force;
+                other.GetComponent<Rigidbody2D>().velocity = Vector3.up * force;
             }
         }
     }
