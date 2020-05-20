@@ -28,6 +28,7 @@ TagManager:
   - obstacle
   - shrub
   - tree
+  - star
   layers:
   - Default
   - TransparentFX

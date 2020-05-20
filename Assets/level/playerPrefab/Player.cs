@@ -6,12 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class Player : MonoBehaviour, FlowControll
 {
-    public float speed = 0;
+    private float speed = 0;
     [HideInInspector]
     public new Rigidbody2D rigidbody;
     private new Animator animation;
     public Coroutine corrotine { get; private set; }
     private Collider2D childrenCollide;
+    [HideInInspector]
     public bool inGame = false;
     private UiManege uiManege;
 
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour, FlowControll
     public void restart()
     {
         animation.SetBool("dead", false);
-        transform.position = new Vector3(0, 1.9f, 0);
+        transform.position = new Vector3(0, 1.9f, -4);
         playerRun();
     }
 
@@ -111,14 +112,15 @@ public class Player : MonoBehaviour, FlowControll
     {
 
         speed = Progress.globalSpeed * .6f;
-        if (transform.position.x < Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x)
-        {
-            uiManege.dead();
-        }
+
         if (inGame)
         {
             if (!death)
             {
+                if (transform.position.x < Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x)
+                {
+                    uiManege.dead();
+                }
                 if (onFloor)
                 {
                     playerRun();
