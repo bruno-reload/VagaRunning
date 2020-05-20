@@ -9,6 +9,7 @@ public class UiManege : MonoBehaviour
     private FlowControll background;
     private FlowControll uiBackground;
     private FlowControll spawnPlatform;
+    private new FlowControll camera;
     private Progress progress;
     private GameObject endGame = null;
     private GameObject inGame = null;
@@ -27,6 +28,7 @@ public class UiManege : MonoBehaviour
         uiBackground = GameObject.FindWithTag("transition").GetComponent<UiBackground>();
         spawnPlatform = GameObject.FindWithTag("spawnPlatform").GetComponent<SpawnPlatform>();
         progress = GameObject.FindWithTag("speedControll").GetComponent<Progress>();
+        camera = GameObject.FindWithTag("MainCamera").GetComponent<FlowControll>();
 
         box = new Box[GameObject.FindGameObjectsWithTag("box").Length];
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("box").Length; i++)
@@ -57,6 +59,7 @@ public class UiManege : MonoBehaviour
     {
         resume();
         uiBackground.resume();
+        (player as Player).walke();
     }
     public void resume()
     {
@@ -87,11 +90,6 @@ public class UiManege : MonoBehaviour
         (player as Player).dead();
         (background as Background).dead();
 
-        if (!endGame || !inGame)
-        {
-            Debug.Log("ui game in and ui game end tags  were not define");
-            return;
-        }
         hideUi(inGame);
         Invoke("laterDaed", 2f);
     }
@@ -164,11 +162,13 @@ public class UiManege : MonoBehaviour
     }
     public void restart()
     {
+
         player.restart();
         uiBackground.restart();
         spawnPlatform.restart();
         initPlatform.restart();
         progress.restart();
+        camera.restart();
 
         foreach (Box item in box)
         {

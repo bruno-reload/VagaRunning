@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class CustomImage : MonoBehaviour
+public class CustomImage : MonoBehaviour,FlowControll
 {
     public Material effect;
     private Vector2 pos;
     private float radius;
-    private Vector2 screen;
+    public Vector2 screen;
     public Texture inTexture;
     public float factorRadius = 1;
     private bool enable = true;
@@ -52,5 +52,15 @@ public class CustomImage : MonoBehaviour
     {
         enable = false;
     }
+    
+    public void pause(){}
+    public void resume(){}
+    public void restart(){
+        
+        effect.SetFloat("_ActiveDeadEffect", 0);
+        effect.SetVector("_PlayerPosition",Vector3.zero);
+        radius = 1;
+    }
+    public void dead(){}
 
 }

@@ -117,13 +117,18 @@ public class SpawnPlatform : MonoBehaviour, FlowControll
                 Vector3 pos;
                 int neo = Random.Range(0, 3);
 
+                if (GameObject.FindWithTag("mushroomDouble") != null && GameObject.FindWithTag("mushroomTriple") != null)
+                {
+                    GameObject.FindWithTag("mushroomDouble").GetComponent<Mushroom>().gameObject.SetActive(false);
+                    GameObject.FindWithTag("mushroomTriple").GetComponent<Mushroom>().gameObject.SetActive(false);
+                }
 
                 activePlatform.enableJumpEffect(neo - lastPlatform);
                 pool[i].GetComponent<Platform>().desableJumpEffect();
 
                 float endPlatform = Mathf.Abs(p.endTarget.x - transform.position.x) / 2;
 
-                pos = new Vector3((Mathf.Sqrt(Progress.globalSpeed * .2f) / Mathf.Abs(Physics2D.gravity.y)) - 4, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
+                pos = new Vector3((Mathf.Sqrt(Progress.globalSpeed) / Mathf.Abs(Physics2D.gravity.y)) - 4, startPos.y + 2.8f * (endPos.y / 3) * neo, 0);
                 pool[i].GetComponent<Transform>().position += pos;
 
                 lastPlatform = neo;

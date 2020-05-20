@@ -41,16 +41,14 @@ public class Player : MonoBehaviour, FlowControll
         animation.enabled = true;
         uiManege = GameObject.FindWithTag("interface").GetComponent<UiManege>();
     }
-    private void playerRun()
-    {
-        animation.SetBool("floor", true);
-        animation.SetFloat("speedX", 0.5f);
-        animation.SetFloat("speedY", 0f);
-        Invoke("normalizeAnimationSpeed", 1);
-    }
-    private void normalizeAnimationSpeed()
+    private void run()
     {
         animation.SetFloat("speedX", 1);
+    }
+    public void walke()
+    {
+        animation.SetFloat("speedX", .5f);
+        Invoke("run", 1f);
     }
     public void pause()
     {
@@ -70,7 +68,7 @@ public class Player : MonoBehaviour, FlowControll
         rigidbody.simulated = true;
         inGame = true;
         death = false;
-        playerRun();
+        run();
     }
     private void lateDead()
     {
@@ -79,23 +77,22 @@ public class Player : MonoBehaviour, FlowControll
         animation.SetFloat("speedY", 0);
         animation.SetFloat("speedX", 0);
     }
-    public void playerJump()
+    public void jump()
     {
-        animation.SetBool("floor", false);
-        if (rigidbody.velocity.y < 0)
-        {
-            animation.SetFloat("speedY", -1);
-        }
         if (rigidbody.velocity.y > 0)
         {
             animation.SetFloat("speedY", 1);
+        }
+        else
+        {
+            animation.SetFloat("speedY", -1);
         }
     }
     public void restart()
     {
         animation.SetBool("dead", false);
         transform.position = new Vector3(0, 1.9f, -4);
-        playerRun();
+        walke();
     }
 
     public void dead()
@@ -104,15 +101,8 @@ public class Player : MonoBehaviour, FlowControll
         death = true;
         Invoke("lateDead", 0.6f);
     }
-    public void aplicatioForce(float force = 1)
-    {
-        rigidbody.velocity = Vector2.up * force;
-    }
     void FixedUpdate()
     {
-
-        speed = Progress.globalSpeed * .6f;
-
         if (inGame)
         {
             if (!death)
@@ -123,16 +113,18 @@ public class Player : MonoBehaviour, FlowControll
                 }
                 if (onFloor)
                 {
-                    playerRun();
+                    animation.SetBool("floor", true);
+                    walke();
                     if (Input.GetKeyUp(KeyCode.A))
                     {
-                        aplicatioForce(speed);
+                        rigidbody.AddForce(Vector2.up * speed * 40);
                         onFloor = false;
                     }
                 }
                 if (!onFloor)
                 {
-                    playerJump();
+                    animation.SetBool("floor", false);
+                    jump();
                 }
             }
             else

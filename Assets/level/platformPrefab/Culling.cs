@@ -6,8 +6,10 @@ public class Culling : MonoBehaviour
 {
     private void Update()
     {
-        float x = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + GetComponent<SpriteRenderer>().sprite.rect.width/2, 0, 0)).x;
-        if (x < Camera.main.ViewportToScreenPoint(Vector3.zero).x)
+        float width = GetComponent<SpriteRenderer>().size.x;
+        
+        float x = Camera.main.WorldToScreenPoint(transform.position + new Vector3(width/2, 0, 0)).x + 50;
+        if (x < 0)
         {
             GetComponent<Renderer>().enabled = false;
         }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2225111605254625884}
   - component: {fileID: 4353245983106640963}
   - component: {fileID: 8890347929808339981}
+  - component: {fileID: 2867742655447041539}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
@@ -110,3 +111,15 @@ PolygonCollider2D:
       - {x: -1.8, y: -1.0799999}
       - {x: 1.8, y: -1.0799999}
       - {x: 1.3468571, y: 0.41034126}
+--- !u!114 &2867742655447041539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655040787340119455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d95d6a6d3d048a792afbfc795dc080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

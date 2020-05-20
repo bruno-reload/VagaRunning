@@ -37,6 +37,8 @@ public class Background : MonoBehaviour, FlowControll
     {
         pause();
         speed = 0;
+        time = (Time.time * speedFactor - lastStep) * speed;
+        renderer.material.SetFloat("_H", time);
     }
     void Update()
     {
@@ -44,7 +46,7 @@ public class Background : MonoBehaviour, FlowControll
         float VDirection = Mathf.Sign(player.rigidbody.velocity.y);
         if (status)
         {
-            speed = Mathf.Lerp(speed, Progress.globalSpeed/10, 0.001f * Time.deltaTime);
+            speed = Mathf.Lerp(speed, Progress.globalSpeed, 0.002f * Time.deltaTime);
             time = (Time.time * speedFactor - lastStep) * speed;
             renderer.material.SetFloat("_H", time);
             if (player.onFloor)

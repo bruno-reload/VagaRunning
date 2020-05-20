@@ -29,6 +29,7 @@ TagManager:
   - shrub
   - tree
   - star
+  - any
   layers:
   - Default
   - TransparentFX

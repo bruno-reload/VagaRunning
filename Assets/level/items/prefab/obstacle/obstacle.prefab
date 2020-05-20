@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6689247994964773646}
   - component: {fileID: 1862294730151347279}
   - component: {fileID: 6537345416341852854}
+  - component: {fileID: 1023469922067664372}
   m_Layer: 0
   m_Name: obstacle
-  m_TagString: obstacle
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +94,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0110628605, y: 0}
+  m_Offset: {x: -0.0110628605, y: 0.65753055}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -104,5 +105,17 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0955443, y: 1.76}
+  m_Size: {x: 2.0955443, y: 0.4449389}
   m_EdgeRadius: 0
+--- !u!114 &1023469922067664372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3761318157257823376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d95d6a6d3d048a792afbfc795dc080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

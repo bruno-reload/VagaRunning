@@ -104,7 +104,7 @@
 
 
                 if(_Slide <= 0){
-                    IN.texcoord.x += _SinTime;
+                    IN.texcoord.x += _SinTime + 1;
                 }
 
                 half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;

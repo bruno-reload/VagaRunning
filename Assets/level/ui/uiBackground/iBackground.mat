@@ -26,7 +26,7 @@ Material:
     m_Floats:
     - _Angle: 45
     - _ColorMask: 15
-    - _Slide: 1.9999998
+    - _Slide: 1.9999994
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
